@@ -1,0 +1,83 @@
+version: "2.1"
+services:
+  node1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    hostname: node1
+    expose:         #不会将端口暴露给容器外应用
+      - "9001"
+    ports:          #将端口暴露到宿主机中
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - E:/workspace/docker/docker-compose/elk/node1/node1.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - cluster.name=elasticsearch-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      es-network:
+        ipv4_address: 172.21.0.10
+  node2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    hostname: node2
+    expose:         #不会将端口暴露给容器外应用
+      - "9002"
+    ports:          #将端口暴露到宿主机中
+      - "9201:9201"
+      - "9301:9301"
+    volumes:
+      - E:/workspace/docker/docker-compose/elk/node2/node2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - cluster.name=elasticsearch-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      es-network:
+        ipv4_address: 172.21.0.11
+  node3:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
+    hostname: node3
+    expose:         #不会将端口暴露给容器外应用
+      - "9003"
+    ports:          #将端口暴露到宿主机中
+      - "9202:9202"
+      - "9302:9302"
+    volumes:
+      - E:/workspace/docker/docker-compose/elk/node3/node3.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      - cluster.name=elasticsearch-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      es-network:
+        ipv4_address: 172.21.0.12
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    ports:
+      - "5601:5601"
+    volumes:
+      - E:/workspace/docker/docker-compose/elk/kibana.yml:/usr/share/kibana/config/kibana.yml
+    environment:
+      - ELASTICSEARCH_URL=http://node1:9200
+    networks:
+      - es-network
+networks:
+  es-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.21.0.0/16
+        gateway: 172.21.0.1
