@@ -1,0 +1,6 @@
+xpack.management.enabled: false
+xpack.monitoring.elasticsearch.hosts:
+- http://node1:9200
+- http://node2:9201
+- http://node3:9202
+xpack.monitoring.enabled: true

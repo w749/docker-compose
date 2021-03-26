@@ -1,4 +1,6 @@
 server.name: kibana
-server.host: "0"
+server.port: 5601
+server.host: "0.0.0.0"
 elasticsearch.hosts: [ "http://node1:9200", "http://node2:9201", "http://node3:9202" ]
-xpack.monitoring.ui.container.elasticsearch.enabled: false
+xpack.monitoring.ui.container.elasticsearch.enabled: true
+

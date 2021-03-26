@@ -1,0 +1,11 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+   - /usr/share/filebeat/applog/logs/*.log
+
+setup.dashboards.enabled: true
+setup.kibana:
+ host: "http://kibana:5601"
+output.elasticsearch:
+  hosts: ["http://node1:9200", "http://node2:9201", "http://node3:9202"]
