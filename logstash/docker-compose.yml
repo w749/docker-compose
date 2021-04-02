@@ -1,0 +1,16 @@
+version: "2.1"
+services: 
+  logstash:
+    hostname: logstash
+    image: logstash:7.10.1
+    command: logstash -f ./config/logstash.conf
+    ports:
+      - 5044:5044
+    volumes:
+      - ./conf:/usr/share/logstash/config
+      - ./logstash.yml:/usr/share/logstash/config/logstash.yml
+    networks:
+      - elk_es-network
+networks:
+ elk_es-network:
+  external: true

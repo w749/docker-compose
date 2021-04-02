@@ -45,9 +45,9 @@ services:
   node3:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     hostname: node3
-    expose:         #不会将端口暴露给容器外应用
+    expose:
       - "9003"
-    ports:          #将端口暴露到宿主机中
+    ports: 
       - "9202:9202"
       - "9302:9302"
     volumes:
@@ -77,37 +77,6 @@ services:
       - node3
     networks:
       - es-network
-  filebeat:
-    image: elastic/filebeat:7.10.1
-    hostname: filebeat
-    restart: always
-    privileged: true
-    command: /usr/share/filebeat/filebeat setup -e 
-    volumes:
-      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - ./mocklog/logs:/usr/share/filebeat/data
-    depends_on:
-      - node1
-      - node2
-      - node3
-    networks:
-      - es-network
-  # logstash:
-  #   hostname: logstash
-  #   image: logstash:7.10.1
-  #   command: logstash -f ./config/logstash.conf
-  #   ports:
-  #     - 5044:5044
-  #   volumes:
-  #     - ./logstash-conf:/usr/share/logstash/config
-  #     - ./logstash.yml:/usr/share/logstash/config/logstash.yml
-  #   depends_on:
-  #     - node1
-  #     - node2
-  #     - node3
-  #     - kibana
-  #   networks:
-  #     - es-network
 networks:
   es-network:
     driver: bridge

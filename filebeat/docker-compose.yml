@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  filebeat:
+    image: elastic/filebeat:7.10.1
+    container_name: filebeat
+    hostname: filebeat
+    restart: always
+    privileged: true
+    command: /usr/share/filebeat/filebeat -c /usr/share/filebeat/conf/log-filebeat-es.yml -e 
+    volumes:
+      - ./conf/:/usr/share/filebeat/conf
+      - ./data:/usr/share/filebeat/data
+    networks:
+      - elk_es-network
+networks:
+ elk_es-network:
+  external: true
