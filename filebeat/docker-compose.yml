@@ -6,7 +6,7 @@ services:
     hostname: filebeat
     restart: always
     privileged: true
-    command: /usr/share/filebeat/filebeat -c /usr/share/filebeat/conf/log-filebeat-es.yml -e 
+    command: /usr/share/filebeat/filebeat -c /usr/share/filebeat/conf/filebeat-logstash.yml -e 
     volumes:
       - ./conf/:/usr/share/filebeat/conf
       - ./data:/usr/share/filebeat/data

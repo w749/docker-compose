@@ -3,12 +3,13 @@ services:
   logstash:
     hostname: logstash
     image: logstash:7.10.1
-    command: logstash -f ./config/logstash.conf
+    container_name: logstash
+    command: logstash -f ./config/filebeat.conf --config.reload.automatic
     ports:
       - 5044:5044
     volumes:
-      - ./conf:/usr/share/logstash/config
-      - ./logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./config:/usr/share/logstash/config
+      - ./data:/usr/share/logstash/data
     networks:
       - elk_es-network
 networks:
