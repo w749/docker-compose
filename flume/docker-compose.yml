@@ -1,0 +1,17 @@
+version: "2.1"
+services: 
+  flume:
+    hostname: flume
+    image: registry.cn-beijing.aliyuncs.com/wangxukun/flume
+    container_name: flume
+    command: /usr/local/flume/bin/flume-ng agent --conf /usr/local/flume/conf --conf-file /usr/local/flume/config/file.conf --name a1 -Dflume.root.logger=INFO,console
+    ports:
+      - 1999:1999
+    volumes:
+      - ./config:/usr/local/flume/config
+      - ./data:/usr/local/flume/data
+    networks:
+      - elk_es-network
+networks:
+ elk_es-network:
+  external: true
