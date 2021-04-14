@@ -12,6 +12,7 @@ services:
       - ./data:/usr/share/logstash/data
     networks:
       - elk_es-network
+# 网络直接使用的是搭建elk构建的网络，目的为在同一网络下
 networks:
  elk_es-network:
   external: true
