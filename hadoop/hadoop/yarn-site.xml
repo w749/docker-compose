@@ -1,0 +1,120 @@
+<configuration>
+<!-- 指定MR走shuffle -->
+    <property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+    </property>
+<!-- 指定ResourceManager的地址-->
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>hadoop02</value>
+    </property>
+<!-- -->
+    <property>
+        <name>yarn.resourcemanager.address</name>
+        <value>hadoop02:8032</value>
+    </property>
+<!-- -->
+    <property>
+        <name>yarn.resourcemanager.scheduler.address</name>
+        <value>hadoop02:8030</value>
+    </property>
+<!-- -->
+    <property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>
+        <value>hadoop02:8031</value>
+    </property>
+<!-- -->
+    <property>
+        <name>yarn.resourcemanager.admin.address</name>
+        <value>hadoop02:8033</value>
+    </property>
+<!-- -->
+    <property>
+        <name>yarn.resourcemanager.webapp.address</name>
+        <value>hadoop02:8088</value>
+    </property>
+<!-- 开启日志聚集功能 -->
+    <property>
+        <name>yarn.log-aggregation-enable</name>
+        <value>true</value>
+    </property>
+<!-- 设置日志聚集服务器地址 -->
+    <property>
+        <name>yarn.log.server.url</name>
+        <value>http://hadoop03:19888/jobhistory/logs</value>
+    </property>
+<!-- 设置日志保留时间为7天 -->
+    <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>604800</value>
+    </property>
+<!-- 环境变量的继承 -->
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_MAPRED_HOME</value>
+    </property>
+<!-- yarn容器允许分配的最大最小内存 -->
+    <property>
+        <name>yarn.scheduler.minimum-allocation-mb</name>
+        <value>1024</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>2048</value>
+    </property>
+<!-- yarn容器允许管理的物理内存大小 -->
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>1024</value>
+    </property>
+<!-- 任务的虚拟内存使用率可能超过物理内存的最大比率 -->
+    <property>
+        <name>yarn.nodemanager.vmem-pmem-ratio</name>
+        <value>2.1</value>
+    </property>
+<!-- 关闭yarn对物理内存和虚拟内存的限制检查 -->
+    <property>
+        <name>yarn.nodemanager.pmem-check-enabled</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+    </property>
+<!--  -->
+    <property>
+        <name>yarn.nodemanager.resource.detect-hardware-capabilities</name>
+        <value>true</value>
+    </property>
+<!-- 本地文件系统上写入中间数据的路径列表 -->
+    <property>
+        <name>yarn.nodemanager.local-dirs</name>
+        <value>file:///usr/local/hadoop/dfs/nodemanager/data</value>
+    </property>
+<!-- 本地文件系统上写入日志的路径列表 -->
+    <property>
+        <name>yarn.nodemanager.log-dirs</name>
+        <value>file:///usr/local/hadoop/dfs/nodemanager/logs</value>
+    </property>
+<!-- 应用程序完成时将应用程序日志移动到的HDFS目录。需要设置适当的权限。仅在启用日志聚合的情况下适用。 -->
+    <property>
+        <name>yarn.nodemanager.remote-app-log-dir</name>
+        <value>file:///usr/local/hadoop/dfs/remote/logs</value>
+    </property>
+<!-- 后缀附加到远程日志目录。 -->
+    <property>
+        <name>yarn.nodemanager.remote-app-log-dir-suffix</name>
+        <value>logs</value>
+    </property>
+<!-- 删除聚合日志前要保留多长时间。 -1禁用。 -->
+    <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>18144000</value>
+    </property>
+<!-- 两次检查汇总日志保留之间的时间。如果设置为0或负值，则该值将计算为聚合日志保留时间的十分之一。 -->
+    <property>
+        <name>yarn.log-aggregation.retain-check-interval-seconds</name>
+        <value>86400</value>
+    </property>
+</configuration>

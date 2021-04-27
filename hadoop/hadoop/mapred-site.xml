@@ -1,0 +1,74 @@
+<configuration>
+    <!-- 指定MapReduce程序运行在Yarn上 -->
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+
+    <!-- map的最大资源限制 -->
+    <property>
+        <name>mapreduce.map.memory.mb</name>
+        <value>1024</value>
+    </property>
+    <!-- map的子jvm资源限制 -->
+    <property>
+        <name>mapreduce.map.java.opts</name>
+        <value>Xmx512M</value>
+    </property>
+    <!-- reduce的最大资源限制 -->
+    <property>
+        <name>mapreduce.reduce.memory.mb</name>
+        <value>1024</value>
+    </property>
+    <!-- reduce的子jvm资源限制 -->
+    <property>
+        <name>mapreduce.reduce.java.opts</name>
+        <value>Xmx512M</value>
+    </property>
+    <!-- 更高的内存限制，同时对数据进行排序以提高效率 -->
+    <property>
+        <name>mapreduce.task.io.sort.mb</name>
+        <value>256</value>
+    </property>
+    <!-- 在对文件进行排序时，更多的流同时合并 -->
+    <property>
+        <name>mapreduce.task.io.sort.factor</name>
+        <value>100</value>
+    </property>
+    <!-- 更高数量的并行拷贝由reduce运行，从数量非常大的map中获取输出 -->
+    <property>
+        <name>mapreduce.reduce.shuffle.parallelcopies</name>
+        <value>25</value>
+    </property>
+    <!-- 历史服务器端地址 -->
+    <property>
+        <name>mapreduce.jobhistory.address</name>
+        <value>hadoop03:10020</value>
+    </property>
+
+    <!-- 历史服务器web端地址 -->
+    <property>
+        <name>mapreduce.jobhistory.webapp.address</name>
+        <value>hadoop03:19888</value>
+    </property>
+    <!-- MR JobHistory中间文件目录 -->
+    <property>
+        <name>mapreduce.jobhistory.intermediate-done-dir</name>
+        <value>/usr/local/hadoop/data/jobhistory/intermediate</value>
+    </property>
+    <!-- MR JobHistory Server管理数据目录 -->
+    <property>
+        <name>mapreduce.jobhistory.done-dir</name>
+        <value>/usr/local/hadoop/data/jobhistory/donedatas</value>
+    </property>
+    <!--  -->
+    <property>
+        <name>yarn.app.mapreduce.am.env</name>
+        <value>HADOOP_MAPRED_HOME=/usr/local/hadoop</value>
+    </property>
+    <!--  -->
+    <property>
+        <name>mapreduce.map.env</name>
+        <value>HADOOP_MAPRED_HOME=/usr/local/hadoop</value>
+    </property>
+</configuration>

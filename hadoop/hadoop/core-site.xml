@@ -1,0 +1,26 @@
+<configuration>
+
+<!-- 指定NameNode的地址 -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://hadoop01:9000</value>
+    </property>
+
+<!-- 指定hadoop数据的存储目录 -->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/usr/local/hadoop/tmp</value>
+    </property>
+
+<!--  缓冲区大小，实际工作中根据服务器性能动态调整-->
+    <property>
+        <name>io.file.buffer.size</name>
+        <value>8192</value>
+    </property>
+
+<!--  开启hdfs的垃圾桶机制，删除掉的数据可以从垃圾桶中回收，默认10080分钟-->
+    <property>
+        <name>fs.trash.interval</name>
+        <value>10080</value>
+    </property>
+</configuration>

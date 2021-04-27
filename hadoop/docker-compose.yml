@@ -1,0 +1,60 @@
+version: "2.1"
+services: 
+  hadoop01:
+    hostname: hadoop01
+    image: registry.cn-beijing.aliyuncs.com/wangxukun/hadoop:2.10.1
+    container_name: hadoop01
+    command: /etc/bootstrap.sh -d -format
+    ports:
+      - "5070:50070"
+    volumes:
+      - ./hadoop:/usr/local/hadoop/etc/hadoop
+    networks:
+      elk_es-network:
+        ipv4_address: 172.21.0.100
+    extra_hosts:
+      - "hadoop01:172.21.0.100"
+      - "hadoop02:172.21.0.110"
+      - "hadoop03:172.21.0.120"
+    depends_on:
+      - hadoop02
+      - hadoop03
+
+  hadoop02:
+    hostname: hadoop02
+    image: registry.cn-beijing.aliyuncs.com/wangxukun/hadoop:2.10.1
+    container_name: hadoop02
+    command: /usr/sbin/sshd -D
+    ports:
+      - "8088:8088"
+    volumes:
+      - ./hadoop:/usr/local/hadoop/etc/hadoop
+    networks:
+      elk_es-network:
+        ipv4_address: 172.21.0.110
+    extra_hosts:
+      - "hadoop01:172.21.0.100"
+      - "hadoop02:172.21.0.110"
+      - "hadoop03:172.21.0.120"
+
+  hadoop03:
+    hostname: hadoop03
+    image: registry.cn-beijing.aliyuncs.com/wangxukun/hadoop:2.10.1
+    container_name: hadoop03
+    command: /usr/sbin/sshd -D
+    ports:
+      - "1988:19888"
+    volumes:
+      - ./hadoop:/usr/local/hadoop/etc/hadoop
+    networks:
+      elk_es-network:
+        ipv4_address: 172.21.0.120
+    extra_hosts:
+      - "hadoop01:172.21.0.100"
+      - "hadoop02:172.21.0.110"
+      - "hadoop03:172.21.0.120"
+
+# 网络直接使用的是搭建elk构建的网络，目的为在同一网络下
+networks:
+ elk_es-network:
+  external: true

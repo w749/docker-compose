@@ -1,0 +1,53 @@
+<configuration>
+
+    <property>
+        <!--  指定secondary namenode的访问端口和端口  -->
+        <name>dfs.namenode.secondary.http-address</name>
+        <value>hadoop03:50090</value>
+    </property>
+    <property>
+        <!--  指定namenode的访问端口和端口  -->
+        <name>dfs.namenode.http-address</name>
+        <value>hadoop01:50070</value>
+    </property>
+    <property>
+        <!--  指定namenode存储元数据的地址  -->
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///usr/local/hadoop/data/dfs/name,file:///usr/local/hadoop/data/dfs/name2</value>
+    </property>
+    <property>
+        <!--  指定datanode存储数据的地址  -->
+        <name>dfs.datanode.name.dir</name>
+        <value>file:///usr/local/hadoop/data/dfs/data,file:///usr/local/hadoop/data/dfs/data2</value>
+    </property>
+    <property>
+        <!--  指定存放日志文件的文件地址  -->
+        <name>dfs.namenode.edits.dir</name>
+        <value>file:///usr/local/hadoop/data/nn/edits</value>
+    </property>
+    <property>
+        <!--  检查点路径  -->
+        <name>dfs.namenode.checkpoint.dir</name>
+        <value>file:///usr/local/hadoop/data/snn/name</value>
+    </property>	
+    <property>
+        <!--  检查点日志路径  -->
+        <name>dfs.namenode.checkpoint.dir</name>
+        <value>file:///usr/local/hadoop/data/snn/edits</value>
+    </property>
+    <property>
+        <!--  文件切片的副本个数  -->
+        <name>dfs.replication.enabled</name>
+        <value>2</value>
+    </property>
+    <property>
+        <!--  设置hdfs的文件权限  -->
+        <name>dfs.permissions</name>
+        <value>false</value>
+    </property>
+    <property>
+        <!--  设置一个文件切片的大小：128M  -->
+        <name>dfs.blocksize</name>
+        <value>134217728</value>
+    </property>
+</configuration>
