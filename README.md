@@ -19,3 +19,5 @@
 
 ### Prometheus
 主要配合clickhouse使用，监控了clickhouse以及其所在服务器运行情况还有docker的资源情况
+
+其次还有两个镜像分别是cadvisor（docker资源监控）和grafana（仪表盘展示）
