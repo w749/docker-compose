@@ -1,0 +1,36 @@
+<yandex>
+  <clickhouse_remote_servers>
+    <ck_cluster>  <!-- 集群名称-->
+      <shard>     <!--集群的第一个分片-->
+        <internal_replication>true</internal_replication>
+        <replica> <!--该分片的第一个副本存储位置-->
+          <host>ck1</host>
+          <port>9000</port>
+        </replica>
+        <replica> <!--该分片的第二个副本-->
+          <host>ck2</host>
+          <port>9000</port>
+        </replica>
+      </shard>
+      <shard>     <!--集群的第二个分片-->
+        <internal_replication>true</internal_replication>
+        <replica> <!--该分片的第一个副本-->
+          <host>ck3</host>
+          <port>9000</port>
+        </replica>
+      </shard>
+    </ck_cluster>
+  </clickhouse_remote_servers>
+
+  <zookeeper-servers>
+    <node index="1">
+      <host>zk1</host>
+      <port>2181</port>
+    </node>
+  </zookeeper-servers>
+
+  <macros>
+    <shard>01</shard>    <!--分片编号，从01开始-->
+    <replica>rep_1_2</replica>   <!--副本名称，建议使用rep_分片编号_副本编号-->
+  </macros>
+</yandex>

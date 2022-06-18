@@ -1,8 +1,0 @@
-# Mysql相关配置
-mysql-root-password Wang1024 END
-mysql-hive-password Wang1024 END
-mysql-drive mysql-connector-java-8.0.25.jar END
-# azkaban相关配置
-azkaban-mysql-user root END
-azkaban-mysql-password Wang1024 END
-azkaban-keystore-password Wang1024 END

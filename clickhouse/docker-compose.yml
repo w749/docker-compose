@@ -1,0 +1,70 @@
+version: '3'
+services:
+  ck1:
+    image: yandex/clickhouse-server
+    container_name: ck1
+    hostname: ck1
+    ulimits:
+      nofile:
+        soft: 30001
+        hard: 30002
+    ports:
+      - 18123:8123
+    expose:
+      - 9000
+    volumes:
+      - /root/docker/clickhouse/conf/config.xml:/etc/clickhouse-server/config.xml
+      - /root/docker/clickhouse/conf/users.xml:/etc/clickhouse-server/users.xml
+      - /root/docker/clickhouse/conf/metrika1.xml:/etc/clickhouse-server/metrika.xml
+      - /root/docker/clickhouse/conf/node_exporter:/var/lib/clickhouse/node_exporter
+    depends_on:
+      - zk1
+    networks:
+      - ck-net
+
+  ck2:
+    image: yandex/clickhouse-server
+    container_name: ck2
+    hostname: ck2
+    ulimits:
+      nofile:
+        soft: 30001
+        hard: 30002
+    volumes:
+      - /root/docker/clickhouse/conf/config.xml:/etc/clickhouse-server/config.xml
+      - /root/docker/clickhouse/conf/users.xml:/etc/clickhouse-server/users.xml
+      - /root/docker/clickhouse/conf/metrika2.xml:/etc/clickhouse-server/metrika.xml
+      - /root/docker/clickhouse/conf/node_exporter:/var/lib/clickhouse/node_exporter
+    depends_on:
+      - zk1
+    networks:
+      - ck-net
+
+  ck3:
+    image: yandex/clickhouse-server
+    container_name: ck3
+    hostname: ck3
+    ulimits:
+      nofile:
+        soft: 30001
+        hard: 30002
+    volumes:
+      - /root/docker/clickhouse/conf/config.xml:/etc/clickhouse-server/config.xml
+      - /root/docker/clickhouse/conf/users.xml:/etc/clickhouse-server/users.xml
+      - /root/docker/clickhouse/conf/metrika3.xml:/etc/clickhouse-server/metrika.xml
+      - /root/docker/clickhouse/conf/node_exporter:/var/lib/clickhouse/node_exporter
+    depends_on:
+      - zk1
+    networks:
+      - ck-net
+
+  zk1:
+    image: zookeeper:3.5
+    container_name: zk1
+    hostname: zk1
+    networks:
+      - ck-net
+
+networks:
+  ck-net:
+    external: true

@@ -1,0 +1,24 @@
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['prometheus:9090']
+
+  # cadvisor docker监控
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+
+  # node_exporter 服务器监控
+  - job_name: 'node'
+    scrape_interval: 8s
+    static_configs:
+      - targets: ['ck1:9100', 'ck2:9100', 'ck3:9100']
+ 
+  # ClickHouse 监控配置
+  - job_name: clickhouse-1
+    static_configs:
+      - targets: ['ck1:9363', 'ck2:9363', 'ck3:9363']
+
