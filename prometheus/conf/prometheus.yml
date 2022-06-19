@@ -16,9 +16,13 @@ scrape_configs:
     scrape_interval: 8s
     static_configs:
       - targets: ['ck1:9100', 'ck2:9100', 'ck3:9100']
- 
+
   # ClickHouse 监控配置
   - job_name: clickhouse-1
     static_configs:
       - targets: ['ck1:9363', 'ck2:9363', 'ck3:9363']
 
+  # Kafka 监控
+  - job_name: 'kafka'
+    static_configs:
+    - targets: ['kafka-exporter:9308']
