@@ -1,0 +1,44 @@
+version: '3'
+services:
+  zk3:
+    image: zookeeper:3.5
+    container_name: zk3
+    hostname: zk3
+    networks:
+      - ck-net
+
+  ds:
+    image: apache/dolphinscheduler:2.0.5
+    container_name: ds
+    hostname: ds
+    command: all
+    ports:
+      - "12345:12345"
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_DATABASE: dolphinscheduler
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      REGISTRY_SERVERS: "zk3:2181"
+    networks:
+      - ck-net
+    depends_on:
+      - zk3
+      - postgres
+
+  postgres:
+    image: postgres:14.4
+    container_name: postgres
+    hostname: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dolphinscheduler
+    networks:
+      - ck-net
+
+networks:
+  ck-net:
+    external: true
+
