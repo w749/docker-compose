@@ -1,7 +1,7 @@
 version: '3'
 services:
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:v2.36.2
     container_name: prometheus
     hostname: prometheus
     volumes:
@@ -12,7 +12,7 @@ services:
       - ck-net
 
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:9.0.1
     container_name: grafana
     hostname: grafana
     ports:
@@ -21,7 +21,7 @@ services:
       - ck-net
 
   cadvisor:
-    image: google/cadvisor
+    image: google/cadvisor:v0.33.0
     container_name: cadvisor
     hostname: cadvisor
     volumes:
@@ -35,3 +35,6 @@ services:
 networks:
   ck-net:
     external: true
+
+# Grafana Dashboard ID
+# Clickhouse:14192, Docker:193, Kafka:12460, Node Exporter:8919

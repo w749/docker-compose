@@ -1,11 +1,18 @@
 version: '3'
 services:
-  mysql_compose:
+  mysql:
     image: mysql:5.7
-    container_name: mysql_compose
+    container_name: mysql
+    hostname: mysql
     ports:
       - 6606:3306
     volumes:
       - /root/docker/mysql/conf/mymysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
+    networks:
+      - ck-net
+
+networks:
+  ck-net:
+    external: true

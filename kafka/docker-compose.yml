@@ -8,7 +8,7 @@ services:
       - ck-net
 
   kafka:
-    image: wurstmeister/kafka
+    image: wurstmeister/kafka:2.13-2.8.1
     container_name: kafka
     hostname: kafka
     ports:
@@ -23,7 +23,7 @@ services:
       - zk2
 
   kafka-exporter:
-    image: danielqsj/kafka-exporter
+    image: danielqsj/kafka-exporter:v1.4.2
     container_name: kafka-exporter
     hostname: kafka-exporter
     networks:

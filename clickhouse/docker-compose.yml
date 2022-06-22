@@ -1,7 +1,7 @@
 version: '3'
 services:
   ck1:
-    image: yandex/clickhouse-server
+    image: yandex/clickhouse-server:21.3.20
     container_name: ck1
     hostname: ck1
     ulimits:
@@ -23,7 +23,7 @@ services:
       - ck-net
 
   ck2:
-    image: yandex/clickhouse-server
+    image: yandex/clickhouse-server:21.3.20
     container_name: ck2
     hostname: ck2
     ulimits:
@@ -41,7 +41,7 @@ services:
       - ck-net
 
   ck3:
-    image: yandex/clickhouse-server
+    image: yandex/clickhouse-server:21.3.20
     container_name: ck3
     hostname: ck3
     ulimits:
