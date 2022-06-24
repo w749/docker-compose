@@ -1,21 +1,17 @@
-version: "2.1"
+version: "3"
 services: 
   flume:
+    image: wxk749/flume:1.10.0
     hostname: flume
-    image: registry.cn-beijing.aliyuncs.com/wangxukun/flume
     container_name: flume
-    # --conf指定flume配置文件目录，--conf--file指定agent配置文件，--name指定agent名称，-Dflume.root.logger指定终端打印log，-Dflume.monitoring.type指定数据传输监控方式，-Dflume.monitoring.port指定监控数据访问端口（http://本地ip:1234/metrics）
-    # 也可以将固定的配置参数写到flume-env.sh文件的JAVA_OPTS参数中，每次启动flume都会加上这些参数了
-    command: /usr/local/flume/bin/flume-ng agent --conf /usr/local/flume/conf --conf-file /usr/local/flume/config/multiplexing.conf --name a1 -Dflume.root.logger=INFO,console -Dflume.monitoring.type=http -Dflume.monitoring.port=1234
-    ports:
-      - 1999:1999
-      - 1234:1234
     volumes:
-      - ./config:/usr/local/flume/config
-      - ./data:/usr/local/flume/data
+      - ./kafka.conf:/opt/flume-config/flume.conf
+      - ./data:/tmp/data
+    environment:
+      - FLUME_AGENT_NAME=docker
     networks:
-      - elk_es-network
-# 网络直接使用的是搭建elk构建的网络，目的为在同一网络下
+      - ck-net
+
 networks:
- elk_es-network:
-  external: true
+  ck-net:
+    external: true
